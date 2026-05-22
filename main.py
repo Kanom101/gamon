@@ -1,5 +1,6 @@
 import requests
 import sqlite3
+import time
 from requests.auth import HTTPBasicAuth
 
 URL = "http://141.212.161.136:8080/gamon"
@@ -38,6 +39,28 @@ cursor.execute("""
 """)
 connection.commit()
 
+COLUMNS = [
+    "type",
+    "creationDateTme",
+    "startDateTime",
+    "endDateTime",
+    "status",
+    "softwareVersion",
+    "deviceModel",
+    "deviceSerialNumber",
+    "manufacturer",
+    "minimumDoseRate",
+    "minimumDoseRateDateTime",
+    "maximumDoseRate",
+    "maximumDoseRateDateTime",
+    "averageDoseRate",
+    "warningThreshold",
+    "alarmThreshold",
+    "latitude",
+    "longitude",
+    "altitude",
+    "raining"
+]
 current = 301813
 try:
     response = requests.get(URL + API_BASE + str(current), auth=auth)
@@ -51,5 +74,6 @@ try:
         print("OK")
     else:
         print("Error")
+    time.sleep(10)
 except Exception as e:
     print("Error:", e)
