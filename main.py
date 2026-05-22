@@ -18,7 +18,7 @@ atexit.register(connection.close)
 
 cursor.execute("""
     CREATE TABLE IF NOT EXISTS gamon_data (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        id INTEGER PRIMARY KEY,
         type TEXT,
         creationDateTime TEXT,
         startDateTime TEXT,
@@ -44,6 +44,7 @@ cursor.execute("""
 connection.commit()
 
 COLUMNS = [
+    "id",
     "type",
     "creationDateTime",
     "startDateTime",
@@ -92,4 +93,4 @@ while True:
     except Exception as e:
         print(f"[Error] Unexpected error: {e}")
 
-    time.sleep(10)
+    time.sleep(3)
