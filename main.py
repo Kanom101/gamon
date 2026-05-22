@@ -42,7 +42,8 @@ current = 301813
 try:
     response = requests.get(URL + API_BASE + str(current), auth=auth)
     data = response.json()
-    cursor.execute("INSERT INTO gamon_data VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", data)
+    values = [data.get(column) for column in COLUMNS]
+    cursor.execute("INSERT INTO gamon_data VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", values)
     connection.commit()
     print(data)
     current += 1
